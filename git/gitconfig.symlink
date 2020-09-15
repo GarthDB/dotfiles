@@ -9,6 +9,7 @@
         wtf     = !$ZSH/bin/git-wtf
         rank-contributors = !$ZSH/bin/git-rank-contributors
         count   = !git shortlog -sn
+	new = !git init && git symbolic-ref HEAD refs/heads/main
 [color]
         diff = auto
         status = auto
