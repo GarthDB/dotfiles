@@ -18,11 +18,11 @@ then
   asdf plugin add nodejs
 fi
 
-# Check for nodejs plugin
-# if [[ "$(asdf plugin list)" != *ruby* ]]
-# then
-#   echo "  Ruby asdf plugin is being installed"
-#   asdf plugin add ruby
-# fi
+# Check for ruby plugin
+if [[ "$(asdf plugin list)" != *ruby* ]]
+then
+  echo "  Ruby asdf plugin is being installed"
+  asdf plugin add ruby
+fi
 
 exit 0
