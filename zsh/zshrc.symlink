@@ -57,8 +57,20 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
-. $(brew --prefix asdf)/asdf.sh
+. "$(brew --prefix asdf)/libexec/asdf.sh"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/usr/local/opt/ffmpeg@4/bin:$PATH"
 export PATH="/usr/local/opt/ffmpeg@4/bin:$PATH"
+export PATH="$HOME/.moon/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/garthdb/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+# proto
+export PROTO_HOME="$HOME/.proto"
+export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
