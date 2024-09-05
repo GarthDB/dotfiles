@@ -40,3 +40,5 @@
 	signingkey = 44009FEE9D791AD682CF9DFE5DC9E6BF6756A72C
 [commit]
 	gpgsign = true
+[diff "spaceman-diff"]
+  command = /opt/homebrew/bin/spaceman-diff
