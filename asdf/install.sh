@@ -11,13 +11,6 @@ then
   brew install asdf > /tmp/asdf-install.log
 fi
 
-# Check for nodejs plugin
-if [[ "$(asdf plugin list)" != *nodejs* ]]
-then
-  echo "  Nodejs asdf plugin is being installed"
-  asdf plugin add nodejs
-fi
-
 # Check for ruby plugin
 if [[ "$(asdf plugin list)" != *ruby* ]]
 then

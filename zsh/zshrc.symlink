@@ -42,12 +42,6 @@ unset config_files
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# added by travis gem
-[ -f /Users/garthdb/.travis/travis.sh ] && source /Users/garthdb/.travis/travis.sh
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
 # Better history
 # Credits to https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
 autoload -U up-line-or-beginning-search
@@ -59,18 +53,6 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 
 . "$(brew --prefix asdf)/libexec/asdf.sh"
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/usr/local/opt/ffmpeg@4/bin:$PATH"
-export PATH="/usr/local/opt/ffmpeg@4/bin:$PATH"
-export PATH="$HOME/.moon/bin:$PATH"
 
-# pnpm
-export PNPM_HOME="/Users/garthdb/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-# proto
-export PROTO_HOME="$HOME/.proto"
-export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH"
+eval "$(proto activate zsh)"
