@@ -1,0 +1,21 @@
+# Ghostty Configuration
+
+theme = GitHub Dark Dimmed
+background-opacity = 0.96
+
+# Global hotkey to toggle terminal visibility (like hyperterm-summon)
+keybind = global:ctrl+grave_accent=toggle_visibility
+initial-window = true
+
+# Font
+font-family = "Monaspace Neon"
+
+# Window - full height panel on the left (about 1/4 screen width)
+window-position-x = 0
+window-position-y = 0
+window-height = 30000
+window-width = 50
+
+# macOS appearance
+macos-titlebar-style = transparent
+window-decoration = auto
