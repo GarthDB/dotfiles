@@ -9,6 +9,7 @@ brew 'spaceman-diff'
 brew 'wget'
 brew 'yt-dlp'
 
+cask 'obsidian'
 cask '1password'
 cask 'font-monaspace'
 cask 'ghostty'
