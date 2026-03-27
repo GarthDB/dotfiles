@@ -52,3 +52,6 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 export PATH="/usr/local/opt/ffmpeg@4/bin:$PATH"
 
 eval "$(proto activate zsh)"
+
+# GPG TTY for signing commits
+export GPG_TTY=$(tty)
