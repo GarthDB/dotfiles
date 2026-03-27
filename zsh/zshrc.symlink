@@ -29,6 +29,8 @@ do
 done
 
 # initialize autocomplete here, otherwise functions won't be loaded
+# opencli completion
+fpath=($HOME/.zsh/completions $fpath)
 autoload -U compinit
 compinit
 
@@ -55,3 +57,5 @@ eval "$(proto activate zsh)"
 
 # GPG TTY for signing commits
 export GPG_TTY=$(tty)
+# Proto global npm installs (e.g. npm install -g @jackwener/opencli) land in globals/bin, not the versioned node bin.
+export PATH="$HOME/.proto/tools/node/globals/bin:$PATH"
