@@ -1,0 +1,3 @@
+# Sensitive / ephemeral files — never commit these
+settings.local.json
+*.local.json
