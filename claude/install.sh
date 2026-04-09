@@ -23,5 +23,25 @@ mkdir -p "$CLAUDE_DIR"
 
 link_file "$CLAUDE_SRC/settings.json" "$CLAUDE_DIR/settings.json"
 link_file "$CLAUDE_SRC/CLAUDE.md"     "$HOME/CLAUDE.md"
+link_file "$CLAUDE_SRC/CLAUDE.md"     "$CLAUDE_DIR/CLAUDE.md"
 link_file "$CLAUDE_SRC/plugins"       "$CLAUDE_DIR/plugins"
 link_file "$CLAUDE_SRC/skills"        "$CLAUDE_DIR/skills"
+
+# Install beads (task tracking for coding agents)
+if ! command -v bd &>/dev/null; then
+  printf "\r  [ \033[00;34m..\033[0m ] Installing beads...\n"
+  brew install beads
+  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] beads installed\n"
+else
+  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] beads already installed\n"
+fi
+
+# Install graphify (codebase knowledge graph skill for Claude Code)
+if ! command -v graphify &>/dev/null; then
+  printf "\r  [ \033[00;34m..\033[0m ] Installing graphify...\n"
+  pipx install graphifyy
+  graphify install
+  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] graphify installed\n"
+else
+  printf "\r\033[2K  [ \033[00;32mOK\033[0m ] graphify already installed\n"
+fi
