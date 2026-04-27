@@ -1,6 +1,6 @@
 ---
 name: github-issues-projects
-description: Manages GitHub Issues, Projects v2, labels, and milestones via the gh CLI. Use when creating or updating issues, project boards, custom fields, labels, or milestones—or when the user tries `gh milestone` (that subcommand does not exist).
+description: Manages GitHub Issues, Projects v2, labels, milestones, and native sub-issues via the gh CLI. Use when creating or updating issues, project boards, custom fields, labels, milestones, or sub-issue parent/child links—or when the user tries `gh milestone` or `gh issue subtask` (those subcommands do not exist).
 ---
 
 # GitHub Issues, Labels, Milestones & Projects v2 (gh CLI)
@@ -130,6 +130,62 @@ Run `gh issue create --help` for repo default (`-R OWNER/REPO`) and other flags.
 
 ---
 
+## Sub-issues (REST only — no `gh issue subtask`)
+
+GitHub's native sub-issues feature (GA 2025) lets you nest issues under a parent. `gh` has no first-class subcommand; use the REST API.
+
+**The API takes a sub-issue's internal database `id`, not its `number`.** Always resolve the number → id first; passing the issue number returns 404.
+
+**Resolve an issue number to its internal id:**
+
+```bash
+gh api repos/OWNER/REPO/issues/ISSUE_NUMBER --jq '.id'
+```
+
+**List sub-issues of a parent:**
+
+```bash
+gh api repos/OWNER/REPO/issues/PARENT_NUMBER/sub_issues
+```
+
+Returns `[]` if the feature is enabled and the parent has no children. A 404 means the feature isn't enabled on the repo (rare — it's on by default for new repos).
+
+**Add an existing issue as a sub-issue:**
+
+```bash
+gh api -X POST repos/OWNER/REPO/issues/PARENT_NUMBER/sub_issues -F sub_issue_id=INTERNAL_ID
+```
+
+**Remove a sub-issue link (note singular `sub_issue`, not `sub_issues`):**
+
+```bash
+gh api -X DELETE repos/OWNER/REPO/issues/PARENT_NUMBER/sub_issue -F sub_issue_id=INTERNAL_ID
+```
+
+**Bulk pattern — convert checkboxes in a parent issue body into native sub-issues:**
+
+```bash
+# 1. Create each sub-issue, capture the printed issue numbers
+gh issue create --title "Subtask one" --body "Parent: #PARENT_NUMBER" --label enhancement
+gh issue create --title "Subtask two" --body "Parent: #PARENT_NUMBER" --label enhancement
+# ...
+
+# 2. For each new issue number, resolve to internal id and link
+for n in 80 81 82 83 84 85; do
+  id=$(gh api repos/OWNER/REPO/issues/$n --jq '.id')
+  gh api -X POST repos/OWNER/REPO/issues/PARENT_NUMBER/sub_issues -F sub_issue_id=$id
+done
+
+# 3. Edit the parent body to remove the checklist — GitHub auto-renders the
+#    sub-issues panel above the body. Don't retroactively create sub-issues
+#    for already-shipped subtasks; note them in the parent body instead.
+gh issue edit PARENT_NUMBER --body "Updated overview…"
+```
+
+**Auto-close on PR merge:** sub-issues are still regular issues, so a PR body with `Closes #SUBISSUE_NUMBER` closes them on merge as usual. The parent issue does not auto-close when all children close.
+
+---
+
 ## Projects v2 (`gh project`)
 
 **Create (returns JSON with `number`, `id`, `url` — capture `number` for later commands):**
@@ -239,6 +295,8 @@ done
 ```
 
 7. **Project scope** — Run `gh auth refresh -s project` before `gh project` commands if you see 403/404 on projects.
+8. **Sub-issue API takes internal `id`, not `number`** — `POST /issues/PARENT/sub_issues` 404s if you pass the issue number. Resolve via `gh api repos/OWNER/REPO/issues/N --jq .id` first. The DELETE endpoint is singular `/sub_issue` (not `sub_issues`).
+9. **No `gh issue subtask`** — Sub-issues are REST-only (see Sub-issues section). Don't attempt `gh issue subtask`.
 
 ---
 
