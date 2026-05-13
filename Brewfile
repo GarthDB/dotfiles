@@ -6,6 +6,7 @@ brew 'postgresql@14'
 brew 'rbenv'
 brew 'ruby-build'
 brew 'spaceman-diff'
+brew 'tmux'
 brew 'wget'
 brew 'yt-dlp'
 

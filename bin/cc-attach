@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# List remote tmux sessions on Grenda, or attach to one.
+# Usage: cc-attach            # list
+#        cc-attach <name>     # attach (creates if missing)
+set -e
+host=${CC_HOST:-grenda}
+if [ -z "$1" ]; then
+  ssh "$host" tmux ls
+else
+  ssh -t "$host" "tmux new-session -As $1"
+fi

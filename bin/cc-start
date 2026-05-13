@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Create or attach to a per-project tmux session.
+# Usage: cc-start <name> [path]
+set -e
+name=${1:?usage: cc-start <name> [path]}
+path=${2:-$PWD}
+tmux new-session -As "$name" -c "$path"

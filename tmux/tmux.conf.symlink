@@ -1,0 +1,18 @@
+# Truecolor passthrough for Ghostty
+set -g default-terminal "tmux-256color"
+set -ga terminal-overrides ",xterm-256color:RGB,xterm-ghostty:RGB"
+
+# Mouse + scrollback
+set -g mouse on
+set -g history-limit 50000
+
+# Sensible base
+set -g base-index 1
+setw -g pane-base-index 1
+set -g renumber-windows on
+set -sg escape-time 10
+
+# Keep default prefix C-b (don't fight Ghostty bindings).
+# Show hostname in status so you always know which machine you're on
+set -g status-left "[#h] "
+set -g status-right "%H:%M %d-%b"
