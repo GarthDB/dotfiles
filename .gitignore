@@ -1,3 +1,8 @@
 git/gitconfig.local.symlink
 Brewfile.lock.json
 .claude/
+claude/plugins/cache/
+claude/plugins/npm-cache/
+claude/plugins/install-counts-cache.json
+claude/plugins/installed_plugins.json
+claude/plugins/marketplaces/spectrum-design-data/

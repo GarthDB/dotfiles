@@ -5,6 +5,14 @@
       "repo": "anthropics/claude-plugins-official"
     },
     "installLocation": "/Users/garthdb/.claude/plugins/marketplaces/claude-plugins-official",
-    "lastUpdated": "2026-04-27T15:50:27.565Z"
+    "lastUpdated": "2026-05-12T21:47:03.997Z"
+  },
+  "spectrum-design-data": {
+    "source": {
+      "source": "github",
+      "repo": "adobe/spectrum-design-data"
+    },
+    "installLocation": "/Users/garthdb/.claude/plugins/marketplaces/spectrum-design-data",
+    "lastUpdated": "2026-05-04T22:11:13.278Z"
   }
 }

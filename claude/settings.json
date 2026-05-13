@@ -29,6 +29,17 @@
     ]
   },
   "enabledPlugins": {
-    "figma@claude-plugins-official": true
-  }
+    "figma@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "s2-docs@spectrum-design-data": true
+  },
+  "extraKnownMarketplaces": {
+    "spectrum-design-data": {
+      "source": {
+        "source": "github",
+        "repo": "adobe/spectrum-design-data"
+      }
+    }
+  },
+  "skipAutoPermissionPrompt": true
 }
